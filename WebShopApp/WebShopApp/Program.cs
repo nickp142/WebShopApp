@@ -27,10 +27,12 @@ namespace WebShopApp
 
 
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+            app.PrepareDatabase();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

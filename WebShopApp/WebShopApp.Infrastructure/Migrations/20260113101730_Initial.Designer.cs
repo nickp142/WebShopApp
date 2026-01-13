@@ -12,8 +12,8 @@ using WebShopApp.Infrastructure.Data;
 namespace WebShopApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251205112136_InitialMigrate")]
-    partial class InitialMigrate
+    [Migration("20260113101730_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
