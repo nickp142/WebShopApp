@@ -1,0 +1,119 @@
+﻿﻿@model WebShopApp.Infrastructure.Data.Entities.Cart
+
+<div class="container my-5">
+    <h2>Моята количка</h2>
+
+    @if (Model.Items == null || !Model.Items.Any())
+    {
+    <p>Количката е празна.</p>
+    }
+    else
+    {
+    <table class="table align-middle">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Продукт</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Общо</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+                {
+            <tr>
+                <td>
+                    <img src="@item.Product.Picture"
+                         alt="@item.Product.ProductName"
+                         style="width:80px; height:auto; object-fit:contain;" />
+                </td>
+                <td><strong>@item.Product.ProductName</strong></td>
+                <td>@item.Price.ToString("0.00") лв.</td>
+                <td>
+                    <div class="d-flex align-items-center gap-2">
+                        <a asp-action="DecreaseQuantity"
+                           asp-route-productId="@item.ProductId"
+                           class="btn btn-outline-secondary btn-sm">−</a>
+                        <span class="fw-bold">@item.Quantity</span>
+                        <a asp-action="IncreaseQuantity"
+                           asp-route-productId="@item.ProductId"
+                           class="btn btn-outline-secondary btn-sm">+</a>
+                    </div>
+                </td>
+                <td>
+                    <strong>@((item.Price * item.Quantity).ToString("0.00")) лв.</strong>
+                </td>
+                <td>
+                    <a asp-action="Remove"
+                       asp-route-productId="@item.ProductId"
+                       class="btn btn-danger btn-sm">🗑</a>
+                </td>
+            </tr>
+                }
+        </tbody>
+    </table>
+
+
+    <form asp-action="ApplyPromoCode" method="post" class="mb-3">
+        <div class="input-group">
+            <input name="code"
+                   class="form-control"
+                   placeholder="Промо код"
+                   value="@(TempData["AppliedPromoCode"] ?? "")" />
+            <button class="btn btn-outline-primary">Приложи</button>
+        </div>
+    </form>
+
+    if (TempData["PromoError"] != null)
+        {
+    <div class="text-danger mb-3">@TempData["PromoError"]</div>
+        }
+
+
+    <div class="text-end mt-3">
+        @{
+                decimal subtotal = Model.Items.Sum(i => i.Price * i.Quantity);
+                decimal total = subtotal;
+
+                if (TempData["TotalWithPromo"] != null)
+                {
+                    var promoString = TempData.Peek("TotalWithPromo")?.ToString();
+
+                    if (decimal.TryParse(promoString, System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out var promoValue))
+                    {
+                        total = promoValue;
+                    }
+                }
+
+
+        }
+
+        <p>Междинна сума: @Model.Items.Sum(i => i.Price * i.Quantity).ToString("F2") лв.</p>
+
+        @if (Model.AppliedPromoDiscountPercent > 0)
+            {
+        <p style="color:green;">
+            Промо кодът е приложен (-@Model.AppliedPromoDiscountPercent %)
+        </p>
+            }
+
+        <h3>Общо: @ViewBag.Total.ToString("F2") лв.</h3>
+
+
+
+    </div>
+
+
+    <div class="d-flex flex-column align-items-end mt-4">
+        <form asp-controller="Order"
+              asp-action="CreateFromCart"
+              method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-success mb-2">Потвърди поръчка</button>
+        </form>
+    </div>
+    }
+</div>

@@ -1,0 +1,176 @@
+﻿﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+<style>
+    body {
+        background-color: #f5f5f5;
+    }
+
+    .category-card img {
+        height: 160px;
+        object-fit: cover;
+    }
+
+    .product-card img {
+        height: 200px;
+        object-fit: contain;
+        padding: 10px;
+    }
+
+    .category-card {
+        transition: transform 0.2s ease;
+    }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .category-card img {
+            height: 160px;
+            object-fit: contain;
+            padding: 12px;
+        }
+</style>
+
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Търсене">
+                <button class="btn btn-outline-light">Търси</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="bg-white py-5">
+    <div class="container text-center">
+        <h1 class="fw-bold mb-3">Всичко, което търсиш – на едно място</h1>
+        <p class="lead mb-4">Лаптопи, монитори, мобилни телефони и още</p>
+        <a href="#" class="btn btn-primary btn-lg">Виж промоциите</a>
+    </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="container my-5">
+    <h2 class="mb-4">Категории</h2>
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-md-3">
+            <div class="card category-card">
+                <img src="https://media.product.which.co.uk/prod/images/ar_2to1_1500x750/22a475e555d7-best-laptop-deals.jpg" class="card-img-top">
+                <div class="card-body text-center fw-bold">Лаптопи</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card category-card">
+                <img src="https://electrolandgh.com/wp-content/uploads/2025/06/TCL-34__-HDR-PROFESSIONAL-MONITOR-34R83Q-SIDE-2.png" class="card-img-top">
+                <div class="card-body text-center fw-bold">Монитори</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card category-card">
+                <img src="https://darlingretail.com/cdn/shop/files/iPhone_15_Blue_Pure_Back_iPhone_15_Blue_Pure_Front_2up_Screen__WWEN_800x.jpg?v=1695103868" class="card-img-top">
+                <div class="card-body text-center fw-bold">Мобилни телефони</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card category-card">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/017/771/428/small/set-of-icons-on-a-theme-accessories-supplies-for-mobile-phones-in-gray-colors-vector.jpg" class="card-img-top">
+                <div class="card-body text-center fw-bold">Аксесоари</div>
+            </div>
+        </div>
+
+        <!-- Втори ред – центриран -->
+        <div class="col-md-3">
+            <div class="card category-card">
+                <img src="https://m.media-amazon.com/images/G/01/DiscoTec/2024/CategoryFlips/Holiday/CE/EN/Browse/CE_Holiday24_1301_LP-CAT-TL__432x432_EN.jpg" class="card-img-top">
+                <div class="card-body text-center fw-bold">Компютри</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card category-card">
+                <img src="https://amstradworld.com/wp-content/uploads/2023/12/Amstrad-AM65UWGTA-WebOS-TV_front.jpg" class="card-img-top">
+                <div class="card-body text-center fw-bold">Телевизори</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card category-card">
+                <img src="https://www.leafstudios.in/cdn/shop/files/1_1099cd20-7237-4bdf-a180-b7126de5ef3d_800x.png?v=1722230645" class="card-img-top">
+                <div class="card-body text-center fw-bold">Смарт часовници</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- PRODUCTS -->
+<section class="container my-5">
+    <h2 class="mb-4">Топ продукти</h2>
+    <div class="row g-4">
+        <div class="col-md-3">
+            <div class="card product-card h-100">
+                <img src="https://img-cdn.heureka.group/v1/df5467dc-ff91-4d68-aa43-617926a7f9a5.jpg?width=400&height=400" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h6 class="card-title">Samsung S23</h6>
+                    <p class="fw-bold">1200 лв.</p>
+                    <button class="btn btn-primary w-100">Купи</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card h-100">
+                <img src="https://mydell.bg/wp-content/uploads/2025/03/1743440441-1.jpg" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h6 class="card-title">DELL Монитор</h6>
+                    <p class="fw-bold">300 лв.</p>
+                    <button class="btn btn-primary w-100">Купи</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card h-100">
+                <img src="https://timer.bg/image/cache/catalog/products/176545/3/MWWU3QC-A-1-1200x1200.jpg" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h6 class="card-title">Смарт Часовник Apple</h6>
+                    <p class="fw-bold">450 лв.</p>
+                    <button class="btn btn-primary w-100">Купи</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card product-card h-100">
+                <img src="https://www.sony.bg/image/1405cd9db3d2b7505dc582197fb82f88?fmt=jpeg" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h6 class="card-title">Телевизор SONY</h6>
+                    <p class="fw-bold">900 лв.</p>
+                    <button class="btn btn-primary w-100">Купи</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-light py-4 mt-5">
+    <div class="container text-center">
+        <p class="mb-1">© 2025 WebShopApp</p>
+        <small>Всички права запазени</small>
+    </div>
+</footer>

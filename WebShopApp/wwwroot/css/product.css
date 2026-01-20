@@ -1,0 +1,15 @@
+﻿﻿.product-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.product-image {
+    height: 200px;
+    object-fit: contain;
+    padding: 10px;
+    background-color: #fff;
+}

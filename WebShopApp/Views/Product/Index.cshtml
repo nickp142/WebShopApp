@@ -1,0 +1,117 @@
+﻿﻿@model IEnumerable<WebShopApp.Models.Product.ProductIndexVM>
+
+    @{
+    ViewData["Title"] = "Products";
+    }
+
+    <div class="container my-5">
+        <h1 class="mb-4">Products</h1>
+
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+    {
+        <a asp-action="Create" class="btn btn-primary mb-4">Create New</a>
+    }
+
+        <!-- FILTER -->
+
+        <form asp-controller="Product" asp-action="Index" method="get" class="row g-3 mb-4 align-items-end">
+            <div class="col-md-3">
+                <input type="text" name="SearchStringBrandName"
+                       class="form-control"
+                       placeholder="Brand">
+            </div>
+            <div class="col-md-3">
+                <input type="text" name="SearchStringCategoryName"
+                       class="form-control"
+                       placeholder="Category">
+            </div>
+            <div class="col-md-2">
+                <select name="sort" class="form-select" onchange="this.form.submit()">
+                    <option value="">Подреди...</option>
+                    <option value="name_asc">A → Z</option>
+                    <option value="name_desc">Z → A</option>
+                    <option value="price_asc">Цена ↑</option>
+                    <option value="price_desc">Цена ↓</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary w-100">
+                    Filter
+                </button>
+            </div>
+        </form>
+
+
+
+        <!-- PRODUCTS GRID -->
+        <div class="row g-4">
+            @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <!-- добавяме mb-4 -->
+                <div class="card product-card h-100">
+                    <img src="@item.Picture"
+                         class="card-img-top product-image"
+                         alt="@item.ProductName">
+
+                    <div class="card-body d-flex flex-column">
+                        <h6 class="card-title">@item.ProductName</h6>
+                        <small class="text-muted">@item.BrandName • @item.CategoryName</small>
+                        @* <p class="fw-bold mt-2">@item.Price лв.</p> *@
+
+                        @if (item.Discount > 0)
+                        {
+                        <span class="badge bg-danger mb-2">-@item.Discount%</span>
+                        }
+
+                        <div class="mt-auto d-grid gap-2">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success btn-sm">Details</a>
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                            <a asp-controller="Order" asp-action="Create" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Order</a>
+                            }
+
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                            {
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Delete</a>
+                            }
+                        </div>
+
+                        <p class="fw-bold mt-2">
+                            @if (item.Discount > 0)
+                            {
+                            <span class="text-muted text-decoration-line-through">
+                                @item.Price.ToString("0.00") лв.
+                            </span>
+                            <span class="text-danger">
+                                @item.DiscountedPrice.ToString("0.00") лв.
+                            </span>
+                            }
+                            else
+                            {
+                            <span>
+                                @item.Price.ToString("0.00") лв.
+                            </span>
+                            }
+                        </p>
+
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-between">
+                        <a asp-controller="Cart" asp-action="Add" asp-route-productId="@item.Id" class="btn btn-primary btn-sm">Add to cart</a>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                        <a asp-controller="Favorites" asp-action="Add" asp-route-productId="@item.Id" class="btn btn-outline-danger btn-sm">❤️ Любими</a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        }
+        </div>
+
+
+    </div>

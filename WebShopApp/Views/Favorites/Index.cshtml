@@ -1,0 +1,38 @@
+﻿﻿@model List<WebShopApp.Infrastructure.Data.Entities.Product>
+
+
+    <div class="container my-5">
+        <h2>Любими продукти</h2>
+
+        @if (!Model.Any())
+    {
+        <p>Няма добавени любими продукти.</p>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var item in Model)
+            {
+            <div class="col-md-3">
+                <div class="card h-100">
+                    <img src="@item.Picture"
+                         class="card-img-top img-fluid"
+                         alt="@item.ProductName" />
+
+                    <div class="card-body text-center">
+                        <h6>@item.ProductName</h6>
+                        <p>@item.Price лв.</p>
+
+                        <a asp-controller="Favorites"
+                           asp-action="Remove"
+                           asp-route-productId="@item.Id"
+                           class="btn btn-sm btn-danger">
+                            ❌ Премахни
+                        </a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+    }
+    </div>
